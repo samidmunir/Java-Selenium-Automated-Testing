@@ -1,4 +1,4 @@
-package part1;
+package login;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
