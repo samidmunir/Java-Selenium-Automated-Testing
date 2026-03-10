@@ -37,4 +37,27 @@ public class BasePage {
     protected void click(By locator) {
         waitForClickable(locator).click();
     }
+
+    protected void type(By locator, String text) {
+        WebElement element = waitForVisibility(locator);
+        
+        element.clear();
+        element.sendKeys(text);
+    }
+
+    protected String getText(By locator) {
+        return waitForVisibility(locator).getText();
+    }
+
+    protected void hover(WebElement element) {
+        actions.moveToElement(element).perform();
+    }
+
+    protected void scrollIntoView(WebElement element) {
+        jsExec.executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+
+    protected void jsExecClick(WebElement element) {
+        jsExec.executeScript("arguments[0].click()", element);
+    }
 }
