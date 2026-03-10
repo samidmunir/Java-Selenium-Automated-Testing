@@ -38,6 +38,22 @@ public class BasePage {
         waitForClickable(locator).click();
     }
 
+    protected void jsExecClick(WebElement element) {
+        jsExec.executeScript("arguments[0].click()", element);
+    }
+
+    protected void safeClick(WebElement element) {
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(element)).click();
+        } catch (Exception e) {
+            jsExec.executeScript("arguments[0].click();", element);
+        }
+    }
+
+    protected void moveToElementAndClick(WebElement element) {
+        actions.moveToElement(element).click().perform();
+    }
+
     protected void type(By locator, String text) {
         WebElement element = waitForVisibility(locator);
         
@@ -53,11 +69,15 @@ public class BasePage {
         actions.moveToElement(element).perform();
     }
 
+    protected void hoverWithPause(WebElement element, long millis) {
+        actions.moveToElement(element).pause(Duration.ofMillis(millis)).perform();
+    }
+
     protected void scrollIntoView(WebElement element) {
         jsExec.executeScript("arguments[0].scrollIntoView(true);", element);
     }
 
-    protected void jsExecClick(WebElement element) {
-        jsExec.executeScript("arguments[0].click()", element);
+    protected void safeScrollIntoView(WebElement element) {
+        jsExec.executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
     }
 }
