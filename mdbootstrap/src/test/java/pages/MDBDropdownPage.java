@@ -18,6 +18,13 @@ public class MDBDropdownPage extends BasePage {
     // private WebElement blueDropdownButton;
     private final By blueDropdownButtonBy = By.xpath("(//button[normalize-space()='Dropdown button'])[1]");
 
+    // @FindBy(xpath = "(//a[normalize-space()='Submenu'])[1]")
+    @FindBy(xpath = "(//a[contains(normalize-space(),'Submenu') and not(contains(normalize-space(),'item'))])[1]")
+    private WebElement submenuOption;
+
+    @FindBy(xpath = "(//a[contains(normalize-space(), 'Submenu item 3')])[1]")
+    private WebElement submenuItem3Option;
+
     public void openPage() {
         driver.get(ProcessConfig.getProperty("base_url"));
     }
@@ -85,5 +92,15 @@ public class MDBDropdownPage extends BasePage {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void hoverOverSubmenu() {
+        System.out.println("\nAbout to hover over Submenu...");
+        hoverWithPause(submenuOption, 800);
+        System.out.println("\nFinished hovering over Submenu");
+    }
+
+    public boolean isSubmenuItem3Visible() {
+        return isElementDisplayed(submenuItem3Option);
     }
 }

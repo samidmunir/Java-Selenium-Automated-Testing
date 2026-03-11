@@ -1,5 +1,6 @@
 package steps;
 
+import io.cucumber.java.en.And;
 import org.testng.Assert;
 
 import io.cucumber.java.en.Given;
@@ -33,5 +34,15 @@ public class MDBCookiesModalSteps {
     @When("the user opens the blue dropdown button")
     public void theUserOpensTheBlueDropdownButton() {
         page.openBlueDropdownButton();
+    }
+
+    @And("the user hovers over the Submenu option")
+    public void theUserHoversOverTheSubmenuOption() {
+        page.hoverOverSubmenu();
+    }
+
+    @Then("the nested submenu should be visible")
+    public void theNestedSubmenuShouldBeVisible() {
+        Assert.assertTrue(page.isSubmenuItem3Visible(), "Expected nested submenu to be visible after hovering over Submenu.");
     }
 }
