@@ -45,4 +45,14 @@ public class MDBCookiesModalSteps {
     public void theNestedSubmenuShouldBeVisible() {
         Assert.assertTrue(page.isSubmenuItem3Visible(), "Expected nested submenu to be visible after hovering over Submenu.");
     }
+
+    @And("the user hovers over Submenu Item 3")
+    public void theUserHoversOverSubmenuItem3() {
+        page.hoverOverSubmenuItem3();
+    }
+
+    @Then("the Multi level 2 option should be visible")
+    public void theMultiLevel2OptionShouldBeVisible() {
+        Assert.assertTrue(page.isMultiLevel2Visible(), "Expected 'Multi level 2' to appear after hovering over Submenu Item 3.");
+    }
 }

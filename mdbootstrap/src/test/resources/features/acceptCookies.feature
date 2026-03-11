@@ -8,3 +8,5 @@ Feature: MDB multi-level dropdown
         When the user opens the blue dropdown button
         And the user hovers over the Submenu option
         Then the nested submenu should be visible
+        And the user hovers over Submenu Item 3
+        Then the Multi level 2 option should be visible
