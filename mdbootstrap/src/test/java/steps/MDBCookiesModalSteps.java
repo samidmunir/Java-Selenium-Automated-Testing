@@ -8,7 +8,7 @@ import io.cucumber.java.en.When;
 import pages.MDBDropdownPage;
 
 public class MDBCookiesModalSteps {
-    private MDBDropdownPage page = new MDBDropdownPage();
+    private final MDBDropdownPage page = new MDBDropdownPage();
 
     @Given("the user is on the MDB multi-level dropdown page")
     public void theUserIsOnTheMDBMultiLevelDropdownPage() {
@@ -28,5 +28,10 @@ public class MDBCookiesModalSteps {
     @Then("the cookie modal should no longer be visible")
     public void theAcceptCookiesModalShouldNoLongerBeVisible() {
         Assert.assertTrue(page.isAcceptCookiesModalGone(), "Expected the accept cookies modal to disappear after clicking Accept Cookies.");
+    }
+
+    @When("the user opens the blue dropdown button")
+    public void theUserOpensTheBlueDropdownButton() {
+        page.openBlueDropdownButton();
     }
 }

@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import base.BasePage;
@@ -12,6 +13,10 @@ public class MDBDropdownPage extends BasePage {
 
     @FindBy(id = "accept_cookies_btn")
     private WebElement acceptCookiesButton;
+
+    // @FindBy(xpath = "(//button[normalize-space()='Dropdown button'])[1]")
+    // private WebElement blueDropdownButton;
+    private final By blueDropdownButtonBy = By.xpath("(//button[normalize-space()='Dropdown button'])[1]");
 
     public void openPage() {
         driver.get(ProcessConfig.getProperty("base_url"));
@@ -31,5 +36,54 @@ public class MDBDropdownPage extends BasePage {
 
     public boolean isAcceptCookiesModalGone() {
         return waitForInvisibility(acceptCookiesModal);
+    }
+
+    /*
+    public void openBlueDropdownButton() {
+        System.out.println("\nScrolling to blue dropdown button....");
+        scrollIntoView(blueDropdownButton);
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            System.out.println("\nTrying regular click...");
+            clickElement(blueDropdownButton);
+            System.out.println("\nRegular click succeeded.");
+        } catch (Exception e) {
+            System.out.println("\nRegular click failed. Trying jsExec click...");
+            jsExecClick(blueDropdownButton);
+            System.out.println("JsExec click executed.");
+        }
+    }
+    */
+
+    public void openBlueDropdownButton() {
+        // System.out.println("\nLocating blue dropdown button...");
+
+        WebElement blueDropdownButton = driver.findElement(blueDropdownButtonBy);
+
+        // System.out.println("\nAbout to scroll...");
+        // scrollIntoView(blueDropdownButton);
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        // System.out.println("\nTrying jsExec click on blue dropdown button...");
+        jsExecClick(blueDropdownButton);
+
+        // System.out.println("\nJsExec click executed.");
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

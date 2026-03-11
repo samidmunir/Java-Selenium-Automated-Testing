@@ -43,6 +43,16 @@ public class BasePage {
         jsExec.executeScript("arguments[0].click();", element);
     }
 
+    protected void hoverWithPause(WebElement element, long millis) {
+        actions.moveToElement(waitForVisibility(element))
+                .pause(Duration.ofMillis(millis))
+                .perform();
+    }
+
+    protected void scrollIntoView(WebElement element) {
+        jsExec.executeAsyncScript("arguments[0].scrollIntoView({block:'center'});", element);
+    }
+
     protected boolean isElementDisplayed(WebElement element) {
         try {
             return waitForVisibility(element).isDisplayed();
@@ -59,60 +69,7 @@ public class BasePage {
         }
     }
 
-    /*
-    protected WebElement waitForVisibility(By locator) {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    protected String getElementText(WebElement element) {
+        return waitForVisibility(element).getText().trim();
     }
-
-    protected WebElement waitForClickable(By locator) {
-        return wait.until(ExpectedConditions.elementToBeClickable(locator));
-    }
-
-    protected void click(By locator) {
-        waitForClickable(locator).click();
-    }
-
-    protected void jsExecClick(WebElement element) {
-        jsExec.executeScript("arguments[0].click()", element);
-    }
-
-    protected void safeClick(WebElement element) {
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(element)).click();
-        } catch (Exception e) {
-            jsExec.executeScript("arguments[0].click();", element);
-        }
-    }
-
-    protected void moveToElementAndClick(WebElement element) {
-        actions.moveToElement(element).click().perform();
-    }
-
-    protected void type(By locator, String text) {
-        WebElement element = waitForVisibility(locator);
-        
-        element.clear();
-        element.sendKeys(text);
-    }
-
-    protected String getText(By locator) {
-        return waitForVisibility(locator).getText();
-    }
-
-    protected void hover(WebElement element) {
-        actions.moveToElement(element).perform();
-    }
-
-    protected void hoverWithPause(WebElement element, long millis) {
-        actions.moveToElement(element).pause(Duration.ofMillis(millis)).perform();
-    }
-
-    protected void scrollIntoView(WebElement element) {
-        jsExec.executeScript("arguments[0].scrollIntoView(true);", element);
-    }
-
-    protected void safeScrollIntoView(WebElement element) {
-        jsExec.executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
-    }
-    */
 }
